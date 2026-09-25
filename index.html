@@ -3,2577 +3,907 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TLTSR Encyclopedia</title>
-
+<title>TLTSR Encyclopedia | The Legend of the Shattered Realm</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{
-    --bg:#080a10;
-    --panel:#10131c;
-    --panel2:#151925;
-    --panel3:#1b2030;
-    --border:#292f40;
-    --text:#e8ebf3;
-    --muted:#9299ab;
-    --blue:#5b8cff;
-    --cyan:#55dfff;
-    --purple:#9b72ff;
-    --green:#5ee6a8;
-    --yellow:#ffd166;
-    --red:#ff667c;
-    --shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-*{box-sizing:border-box}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    background:
-        radial-gradient(circle at 80% 0%,rgba(91,140,255,.09),transparent 30%),
-        radial-gradient(circle at 20% 100%,rgba(155,114,255,.07),transparent 30%),
-        var(--bg);
-    color:var(--text);
-    font-family:Inter,Segoe UI,Arial,sans-serif;
-    line-height:1.65;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button,input{
-    font:inherit;
-}
-
-/* TOP BAR */
-
-.topbar{
-    height:68px;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:100;
-    background:rgba(8,10,16,.88);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.06);
-    display:flex;
-    align-items:center;
-    padding:0 24px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    min-width:280px;
-}
-
-.brand-icon{
-    width:38px;
-    height:38px;
-    border-radius:11px;
-    display:grid;
-    place-items:center;
-    font-weight:900;
-    background:linear-gradient(135deg,#5b8cff,#8c63ff);
-    box-shadow:0 8px 25px rgba(91,140,255,.25);
-}
-
-.brand-title{
-    font-weight:800;
-    letter-spacing:.3px;
-}
-
-.brand-sub{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:-3px;
-}
-
-.search{
-    flex:1;
-    max-width:570px;
-    margin:auto;
-    position:relative;
-}
-
-.search input{
-    width:100%;
-    height:42px;
-    background:#11151f;
-    border:1px solid var(--border);
-    border-radius:12px;
-    color:white;
-    padding:0 44px 0 43px;
-    outline:none;
-    transition:.2s;
-}
-
-.search input:focus{
-    border-color:#527de0;
-    box-shadow:0 0 0 3px rgba(91,140,255,.1);
-}
-
-.search-icon{
-    position:absolute;
-    left:15px;
-    top:9px;
-    color:var(--muted);
-}
-
-.search-shortcut{
-    position:absolute;
-    right:11px;
-    top:10px;
-    color:#697083;
-    font-size:12px;
-    border:1px solid #303646;
-    border-radius:6px;
-    padding:1px 6px;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-    position:fixed;
-    top:68px;
-    bottom:0;
-    left:0;
-    width:275px;
-    overflow-y:auto;
-    padding:24px 16px;
-    border-right:1px solid rgba(255,255,255,.06);
-    background:rgba(9,11,17,.72);
-}
-
-.side-label{
-    color:#62697a;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.5px;
-    padding:0 12px;
-    margin:5px 0 9px;
-}
-
-.side-link{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:9px 12px;
-    border-radius:9px;
-    color:#9da4b5;
-    font-size:13px;
-    margin:2px 0;
-    transition:.15s;
-}
-
-.side-link:hover{
-    background:#151a26;
-    color:#fff;
-}
-
-.side-link.active{
-    background:linear-gradient(90deg,rgba(91,140,255,.17),rgba(91,140,255,.05));
-    color:#dce7ff;
-    border-left:2px solid var(--blue);
-}
-
-.side-number{
-    width:22px;
-    color:#555d70;
-    font-size:11px;
-}
-
-.side-link.active .side-number{
-    color:#6f9aff;
-}
-
-/* MAIN */
-
-.main{
-    margin-left:275px;
-    padding-top:68px;
-}
-
-.content{
-    max-width:1120px;
-    margin:auto;
-    padding:44px 42px 100px;
-}
-
-/* HERO */
-
-.hero{
-    min-height:330px;
-    border:1px solid var(--border);
-    border-radius:22px;
-    overflow:hidden;
-    position:relative;
-    padding:48px;
-    background:
-        radial-gradient(circle at 78% 30%,rgba(91,140,255,.26),transparent 25%),
-        radial-gradient(circle at 88% 80%,rgba(155,114,255,.18),transparent 30%),
-        linear-gradient(135deg,#111827,#0d1019 60%,#11152a);
-    box-shadow:var(--shadow);
-}
-
-.hero:before{
-    content:"";
-    position:absolute;
-    inset:0;
-    opacity:.18;
-    background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-    background-size:35px 35px;
-    mask-image:linear-gradient(90deg,#000,transparent);
-}
-
-.hero-content{
-    position:relative;
-    max-width:650px;
-}
-
-.eyebrow{
-    color:#76a0ff;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:11px;
-    font-weight:800;
-    margin-bottom:14px;
-}
-
-.hero h1{
-    font-size:48px;
-    line-height:1.08;
-    margin:0 0 17px;
-    letter-spacing:-2px;
-}
-
-.hero h1 span{
-    color:#729aff;
-}
-
-.hero p{
-    color:#aab1c1;
-    max-width:620px;
-    margin:0;
-    font-size:15px;
-}
-
-.hero-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:25px;
-}
-
-.badge{
-    padding:6px 10px;
-    border-radius:7px;
-    border:1px solid #303849;
-    background:rgba(0,0,0,.2);
-    color:#aeb6c8;
-    font-size:11px;
-}
-
-/* CARDS */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin:28px 0;
-}
-
-.card{
-    background:linear-gradient(145deg,#11151f,#0d1018);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:20px;
-    transition:.2s;
-}
-
-.card:hover{
-    transform:translateY(-2px);
-    border-color:#3a4358;
-    box-shadow:0 12px 30px rgba(0,0,0,.2);
-}
-
-.card-icon{
-    font-size:22px;
-    margin-bottom:13px;
-}
-
-.card h3{
-    font-size:15px;
-    margin:0 0 5px;
-}
-
-.card p{
-    font-size:12px;
-    color:var(--muted);
-    margin:0;
-}
-
-/* SECTIONS */
-
-.section{
-    margin-top:65px;
-    scroll-margin-top:90px;
-}
-
-.section-head{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    margin-bottom:22px;
-}
-
-.section-number{
-    font-size:11px;
-    color:#638efc;
-    background:rgba(91,140,255,.1);
-    border:1px solid rgba(91,140,255,.18);
-    border-radius:7px;
-    padding:5px 8px;
-    margin-top:5px;
-    font-weight:800;
-}
-
-.section h2{
-    margin:0;
-    font-size:28px;
-    letter-spacing:-.7px;
-}
-
-.section-desc{
-    color:#777f91;
-    font-size:13px;
-    margin-top:2px;
-}
-
-.prose{
-    color:#b5bac7;
-    font-size:14px;
-}
-
-.prose strong{
-    color:#e5e8ef;
-}
-
-/* INFO BOX */
-
-.info{
-    padding:17px 19px;
-    border-radius:12px;
-    background:#111725;
-    border:1px solid #27334b;
-    margin:20px 0;
-    position:relative;
-    overflow:hidden;
-}
-
-.info:before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    bottom:0;
-    width:3px;
-    background:var(--blue);
-}
-
-.info.green:before{background:var(--green)}
-.info.purple:before{background:var(--purple)}
-.info.yellow:before{background:var(--yellow)}
-.info.red:before{background:var(--red)}
-
-.info-title{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    font-weight:800;
-    margin-bottom:5px;
-}
-
-.info p{
-    margin:0;
-    color:#a6adbc;
-    font-size:13px;
-}
-
-/* LIST */
-
-.clean-list{
-    padding-left:0;
-    list-style:none;
-}
-
-.clean-list li{
-    padding:10px 0 10px 27px;
-    position:relative;
-    color:#aeb4c2;
-    font-size:13px;
-    border-bottom:1px solid rgba(255,255,255,.04);
-}
-
-.clean-list li:before{
-    content:"";
-    position:absolute;
-    left:7px;
-    top:18px;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#638efc;
-}
-
-/* PROGRESSION */
-
-.progression{
-    display:flex;
-    flex-direction:column;
-    margin:25px 0;
-}
-
-.step{
-    display:grid;
-    grid-template-columns:45px 1fr;
-    min-height:67px;
-    position:relative;
-}
-
-.step:not(:last-child):after{
-    content:"";
-    position:absolute;
-    left:18px;
-    top:38px;
-    bottom:-1px;
-    width:1px;
-    background:#2d3547;
-}
-
-.step-num{
-    width:37px;
-    height:37px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    font-size:11px;
-    font-weight:800;
-    color:#9cb8ff;
-    background:#121b31;
-    border:1px solid #344a7d;
-    z-index:1;
-}
-
-.step-content{
-    padding:2px 0 24px 13px;
-}
-
-.step-content strong{
-    font-size:14px;
-}
-
-.step-content p{
-    color:#747d8f;
-    font-size:12px;
-    margin:2px 0 0;
-}
-
-/* TABLE */
-
-.table-wrap{
-    overflow-x:auto;
-    border:1px solid var(--border);
-    border-radius:13px;
-    margin:22px 0;
-}
-
-table{
-    border-collapse:collapse;
-    width:100%;
-    min-width:600px;
-}
-
-th{
-    text-align:left;
-    color:#7f8799;
-    background:#11151f;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    padding:12px 15px;
-}
-
-td{
-    padding:13px 15px;
-    border-top:1px solid #202533;
-    font-size:13px;
-    color:#aeb5c4;
-}
-
-td:first-child{
-    color:#e0e4ec;
-    font-weight:600;
-}
-
-/* ENTITY CARDS */
-
-.entity-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.entity{
-    border:1px solid var(--border);
-    border-radius:15px;
-    overflow:hidden;
-    background:#10141e;
-}
-
-.entity-top{
-    height:115px;
-    position:relative;
-    padding:18px;
-    background:
-        radial-gradient(circle at 80% 30%,rgba(91,140,255,.25),transparent 25%),
-        linear-gradient(135deg,#151b2b,#0d111a);
-}
-
-.entity-top.purple{
-    background:
-        radial-gradient(circle at 80% 30%,rgba(155,114,255,.3),transparent 25%),
-        linear-gradient(135deg,#1a152b,#0d1018);
-}
-
-.entity-top.green{
-    background:
-        radial-gradient(circle at 80% 30%,rgba(94,230,168,.2),transparent 25%),
-        linear-gradient(135deg,#10231f,#0d1415);
-}
-
-.entity-symbol{
-    font-size:35px;
-}
-
-.entity-body{
-    padding:17px;
-}
-
-.entity-body h3{
-    margin:0 0 4px;
-    font-size:16px;
-}
-
-.entity-body p{
-    color:#818999;
-    font-size:12px;
-    margin:0;
-}
-
-/* CHECKLIST */
-
-.checklist{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:9px;
-}
-
-.check{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:11px 13px;
-    border:1px solid #252b39;
-    border-radius:9px;
-    background:#10141d;
-    color:#9fa6b6;
-    font-size:12px;
-    cursor:pointer;
-    user-select:none;
-    transition:.15s;
-}
-
-.check:hover{
-    border-color:#394257;
-}
-
-.check.done{
-    color:#687181;
-    text-decoration:line-through;
-    background:#0d1514;
-}
-
-.check-box{
-    width:16px;
-    height:16px;
-    border:1px solid #3a4355;
-    border-radius:5px;
-    flex:none;
-}
-
-.check.done .check-box{
-    background:#3d9975;
-    border-color:#3d9975;
-    position:relative;
-}
-
-.check.done .check-box:after{
-    content:"✓";
-    color:white;
-    font-size:11px;
-    position:absolute;
-    left:3px;
-    top:-1px;
-}
-
-/* FAQ */
-
-.faq{
-    border:1px solid var(--border);
-    border-radius:12px;
-    overflow:hidden;
-}
-
-details{
-    border-bottom:1px solid #222735;
-    background:#10141d;
-}
-
-details:last-child{
-    border-bottom:0;
-}
-
-summary{
-    padding:15px 17px;
-    cursor:pointer;
-    color:#d9dde6;
-    font-size:13px;
-    font-weight:600;
-}
-
-details p{
-    padding:0 17px 17px;
-    margin:0;
-    color:#858d9e;
-    font-size:13px;
-}
-
-/* FOOTER */
-
-footer{
-    border-top:1px solid #202533;
-    margin-top:80px;
-    padding:35px 0;
-    color:#5e6678;
-    font-size:11px;
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-}
-
-/* SEARCH RESULTS */
-
-.search-results{
-    position:absolute;
-    top:48px;
-    left:0;
-    right:0;
-    background:#11151f;
-    border:1px solid #303747;
-    border-radius:12px;
-    box-shadow:var(--shadow);
-    display:none;
-    max-height:350px;
-    overflow:auto;
-    z-index:200;
-}
-
-.result{
-    display:block;
-    padding:12px 15px;
-    border-bottom:1px solid #222735;
-}
-
-.result:hover{
-    background:#181d29;
-}
-
-.result-title{
-    font-size:12px;
-    font-weight:700;
-}
-
-.result-desc{
-    color:#71798a;
-    font-size:11px;
-}
-
-/* MOBILE */
-
-.mobile-menu{
-    display:none;
-}
-
-@media(max-width:900px){
-    .sidebar{
-        transform:translateX(-100%);
-        transition:.25s;
-        z-index:90;
-        background:#0b0e15;
+    :root {
+        --bg-abyss: #050608;
+        --bg-panel: #0b0d14;
+        --bg-card: #11141e;
+        --border-dim: #1f2435;
+        --border-glow: #2a3b5c;
+        --text-main: #c8ccd8;
+        --text-muted: #6b7280;
+        --text-bright: #f3f4f6;
+        --accent-blue: #38bdf8;
+        --accent-teal: #2dd4bf;
+        --accent-gold: #d4af37;
+        --accent-red: #ef4444;
+        --font-title: 'Cinzel', serif;
+        --font-body: 'Inter', sans-serif;
+        --font-mono: 'Fira Code', monospace;
     }
 
-    .sidebar.open{
-        transform:translateX(0);
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background-color: var(--bg-abyss);
+        color: var(--text-main);
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.7;
+        display: flex;
+        min-height: 100vh;
+        overflow-x: hidden;
     }
 
-    .main{
-        margin-left:0;
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-abyss); }
+    ::-webkit-scrollbar-thumb { background: var(--border-dim); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+        width: 280px;
+        flex-shrink: 0;
+        background: var(--bg-panel);
+        border-right: 1px solid var(--border-dim);
+        padding: 30px 0;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
     }
 
-    .mobile-menu{
-        display:block;
-        background:none;
-        border:0;
-        color:white;
-        font-size:22px;
-        margin-right:15px;
+    .sidebar-header {
+        padding: 0 24px 20px;
+        border-bottom: 1px solid var(--border-dim);
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .brand{
-        min-width:auto;
+    .sidebar-header h1 {
+        font-family: var(--font-title);
+        font-size: 16px;
+        color: var(--text-bright);
+        letter-spacing: 1px;
     }
 
-    .brand-sub{
-        display:none;
+    .search-icon {
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        font-size: 14px;
+        border: 1px solid var(--border-dim);
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
     }
 
-    .brand-title{
-        display:none;
+    .nav-group { margin-bottom: 20px; padding: 0 24px; }
+    .nav-group-title {
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--text-muted);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
     }
 
-    .search{
-        margin-left:auto;
-        max-width:none;
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 6px 10px;
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 13px;
+        border-left: 2px solid transparent;
+        transition: all 0.2s ease;
+        margin-bottom: 2px;
     }
 
-    .content{
-        padding:28px 18px 70px;
+    .nav-link:hover {
+        background: rgba(56, 189, 248, 0.05);
+        color: var(--accent-blue);
+        border-left-color: var(--accent-blue);
     }
 
-    .hero{
-        padding:32px 25px;
+    .nav-link .rune { font-family: var(--font-mono); font-size: 12px; width: 24px; opacity: 0.6; }
+    .nav-link.realm-link:hover { color: var(--accent-teal); border-left-color: var(--accent-teal); }
+    .nav-link.system-link:hover { color: var(--accent-gold); border-left-color: var(--accent-gold); }
+
+    /* --- MAIN CONTENT --- */
+    .main-content {
+        flex: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 60px 40px 120px;
     }
 
-    .hero h1{
-        font-size:36px;
+    /* --- HERO --- */
+    .hero { margin-bottom: 100px; position: relative; }
+    .hero-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-teal); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--accent-teal); }
+    .hero h2 { font-family: var(--font-title); font-size: 42px; color: #fff; line-height: 1.1; margin-bottom: 20px; letter-spacing: 1px; }
+    .hero-desc { font-size: 16px; color: var(--text-muted); max-width: 640px; line-height: 1.8; margin-bottom: 30px; }
+    
+    .hero-tags { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+    .tag-pill { font-family: var(--font-mono); font-size: 11px; color: var(--text-main); border: 1px solid var(--border-dim); padding: 6px 14px; border-radius: 99px; background: var(--bg-panel); letter-spacing: 1px; }
+    
+    .hero-actions { display: flex; gap: 16px; }
+    .btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px;
+        text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-dim);
+        color: var(--text-main); background: var(--bg-card); transition: all 0.2s;
     }
+    .btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .btn.realm:hover { border-color: var(--accent-teal); color: var(--accent-teal); }
+    .btn.ref:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
 
-    .grid{
-        grid-template-columns:1fr;
-    }
+    /* --- SECTIONS --- */
+    .section { margin-bottom: 120px; position: relative; scroll-margin-top: 40px; }
+    .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid var(--border-dim); padding-bottom: 16px; }
+    .section-number { font-family: var(--font-title); font-size: 13px; color: var(--accent-gold); letter-spacing: 2px; }
+    .section-title { font-family: var(--font-title); font-size: 26px; color: var(--text-bright); letter-spacing: 2px; text-transform: uppercase; }
 
-    .entity-grid,
-    .checklist{
-        grid-template-columns:1fr;
-    }
-}
+    h3 { font-family: var(--font-title); font-size: 20px; color: #fff; margin-bottom: 16px; letter-spacing: 1px; }
+    p { margin-bottom: 20px; color: var(--text-main); }
 
-@media(max-width:550px){
-    .topbar{
-        padding:0 12px;
-    }
+    .codex-note { border-left: 2px solid var(--accent-gold); background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%); padding: 20px 24px; margin: 30px 0; font-style: italic; color: #e5e7eb; }
+    .codex-note .label { font-family: var(--font-mono); font-size: 10px; font-style: normal; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px; }
+    
+    .codex-warning { border-left: 2px solid var(--accent-red); background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%); padding: 20px 24px; margin: 30px 0; }
+    .codex-warning .label { font-family: var(--font-mono); font-size: 10px; color: var(--accent-red); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px; }
 
-    .search-shortcut{
-        display:none;
-    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 30px 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 30px 0; }
 
-    .hero{
-        border-radius:16px;
-    }
+    .data-card { background: var(--bg-card); border: 1px solid var(--border-dim); padding: 24px; transition: border-color 0.3s ease; }
+    .data-card:hover { border-color: var(--border-glow); }
+    .data-card .icon { font-family: var(--font-mono); font-size: 20px; color: var(--accent-blue); margin-bottom: 16px; display: block; }
+    .data-card h4 { font-family: var(--font-title); font-size: 16px; color: #fff; margin-bottom: 10px; letter-spacing: 1px; }
+    .data-card p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.6; }
 
-    .hero h1{
-        font-size:30px;
-    }
+    .codex-table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 14px; }
+    .codex-table th { text-align: left; font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid var(--border-dim); }
+    .codex-table td { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text-main); }
+    .codex-table tr:hover td { background: rgba(255,255,255,0.01); }
 
-    .section{
-        margin-top:48px;
-    }
+    .tag { display: inline-block; font-family: var(--font-mono); font-size: 10px; padding: 4px 8px; border: 1px solid var(--border-dim); color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+    .tag.blue { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .tag.gold { border-color: var(--accent-gold); color: var(--accent-gold); }
 
-    .section h2{
-        font-size:23px;
-    }
+    .blue-realm-zone { background: linear-gradient(180deg, var(--bg-abyss) 0%, #07101a 50%, var(--bg-abyss) 100%); margin: 0 -40px; padding: 80px 40px; border-top: 1px solid var(--border-glow); border-bottom: 1px solid var(--border-glow); position: relative; }
+    .blue-realm-zone::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(45, 212, 191, 0.1) 0%, transparent 70%); pointer-events: none; }
 
-    footer{
-        flex-direction:column;
+    .timeline { position: relative; padding-left: 40px; margin: 40px 0; }
+    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--accent-gold), var(--accent-blue), transparent); }
+    .timeline-step { position: relative; margin-bottom: 30px; }
+    .timeline-step::before { content: ''; position: absolute; left: -36px; top: 6px; width: 9px; height: 9px; background: var(--bg-abyss); border: 2px solid var(--accent-gold); transform: rotate(45deg); }
+    .timeline-step.blue::before { border-color: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); }
+    .timeline-step h4 { font-family: var(--font-title); font-size: 16px; color: #fff; margin-bottom: 6px; }
+    .timeline-step p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+    .checklist { columns: 2; column-gap: 40px; list-style: none; margin: 30px 0; }
+    .checklist li { break-inside: avoid; padding: 8px 0; border-bottom: 1px dashed var(--border-dim); font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 12px; }
+    .checklist li::before { content: '◇'; font-family: var(--font-mono); color: var(--border-glow); font-size: 14px; }
+
+    .faq-item { border-bottom: 1px solid var(--border-dim); padding: 20px 0; }
+    .faq-q { font-family: var(--font-title); font-size: 16px; color: #fff; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q::after { content: '+'; font-family: var(--font-mono); color: var(--accent-blue); font-size: 20px; }
+    .faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    .footer { margin-top: 100px; padding-top: 40px; border-top: 1px solid var(--border-dim); text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 2px; }
+
+    @media (max-width: 900px) {
+        .sidebar { display: none; }
+        .main-content { padding: 40px 20px; }
+        .hero h2 { font-size: 32px; }
+        .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        .checklist { columns: 1; }
+        .blue-realm-zone { margin: 0 -20px; padding: 60px 20px; }
     }
-}
 </style>
 </head>
-
 <body>
 
-<header class="topbar">
-
-    <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
-
-    <a href="#top" class="brand">
-        <div class="brand-icon">T</div>
-        <div>
-            <div class="brand-title">TLTSR Encyclopedia</div>
-            <div class="brand-sub">The Legend of the Shattered Realm</div>
-        </div>
-    </a>
-
-    <div class="search">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h1>TLTSR<br>ENCYCLOPEDIA</h1>
         <span class="search-icon">⌕</span>
-        <input id="searchInput" type="text" placeholder="Search the encyclopedia..." autocomplete="off">
-        <span class="search-shortcut">/</span>
-        <div id="searchResults" class="search-results"></div>
     </div>
 
-</header>
+    <div class="nav-group">
+        <a href="#game" class="nav-link"><span class="rune">01</span> The Game</a>
+        <a href="#world" class="nav-link"><span class="rune">02</span> The World</a>
+        <a href="#biomes" class="nav-link"><span class="rune">03</span> Biomes</a>
+        <a href="#structures" class="nav-link"><span class="rune">06</span> Structures</a>
+        <a href="#items" class="nav-link"><span class="rune">08</span> Items</a>
+        <a href="#weapons" class="nav-link"><span class="rune">09</span> Weapons</a>
+        <a href="#crafting" class="nav-link"><span class="rune">11</span> Crafting</a>
+        <a href="#enchanting" class="nav-link"><span class="rune">13</span> Enchanting</a>
+        <a href="#wings" class="nav-link"><span class="rune">16</span> Wings</a>
+    </div>
 
+    <div class="nav-group">
+        <div class="nav-group-title">The Blue Realm</div>
+        <a href="#blue-realm" class="nav-link realm-link"><span class="rune">20</span> Shattered Blue Realm</a>
+        <a href="#blue-plains" class="nav-link realm-link"><span class="rune">21</span> Blue Plains</a>
+        <a href="#blue-hills" class="nav-link realm-link"><span class="rune">22</span> Blue Hills</a>
+        <a href="#warden" class="nav-link realm-link"><span class="rune">19</span> Azure Warden</a>
+    </div>
 
-<aside class="sidebar" id="sidebar">
+    <div class="nav-group">
+        <div class="nav-group-title">Systems</div>
+        <a href="#generation" class="nav-link system-link"><span class="rune">23</span> World Generation</a>
+        <a href="#seeds" class="nav-link system-link"><span class="rune">24</span> Seeds</a>
+        <a href="#multiplayer" class="nav-link system-link"><span class="rune">25</span> Multiplayer</a>
+        <a href="#inventory" class="nav-link system-link"><span class="rune">26</span> Inventory</a>
+        <a href="#minimap" class="nav-link system-link"><span class="rune">27</span> Minimap</a>
+    </div>
 
-    <div class="side-label">ENCYCLOPEDIA</div>
-
-    <a class="side-link active" href="#game">
-        <span class="side-number">01</span> The Game
-    </a>
-
-    <a class="side-link" href="#world">
-        <span class="side-number">02</span> The World
-    </a>
-
-    <a class="side-link" href="#biomes">
-        <span class="side-number">03</span> Biomes
-    </a>
-
-    <a class="side-link" href="#structures">
-        <span class="side-number">06</span> Structures
-    </a>
-
-    <a class="side-link" href="#items">
-        <span class="side-number">08</span> Items
-    </a>
-
-    <a class="side-link" href="#weapons">
-        <span class="side-number">09</span> Weapons
-    </a>
-
-    <a class="side-link" href="#crafting">
-        <span class="side-number">11</span> Crafting
-    </a>
-
-    <a class="side-link" href="#enchanting">
-        <span class="side-number">13</span> Enchanting
-    </a>
-
-    <a class="side-link" href="#wings">
-        <span class="side-number">16</span> Wings
-    </a>
-
-    <div class="side-label" style="margin-top:25px">THE BLUE REALM</div>
-
-    <a class="side-link" href="#blue-realm">
-        <span class="side-number">20</span> Shattered Blue Realm
-    </a>
-
-    <a class="side-link" href="#blue-plains">
-        <span class="side-number">21</span> Blue Plains
-    </a>
-
-    <a class="side-link" href="#blue-hills">
-        <span class="side-number">22</span> Blue Hills
-    </a>
-
-    <a class="side-link" href="#warden">
-        <span class="side-number">19</span> Azure Warden
-    </a>
-
-    <div class="side-label" style="margin-top:25px">SYSTEMS</div>
-
-    <a class="side-link" href="#generation">
-        <span class="side-number">23</span> World Generation
-    </a>
-
-    <a class="side-link" href="#seeds">
-        <span class="side-number">24</span> Seeds
-    </a>
-
-    <a class="side-link" href="#multiplayer">
-        <span class="side-number">25</span> Multiplayer
-    </a>
-
-    <a class="side-link" href="#inventory">
-        <span class="side-number">26</span> Inventory
-    </a>
-
-    <a class="side-link" href="#minimap">
-        <span class="side-number">27</span> Minimap
-    </a>
-
-    <div class="side-label" style="margin-top:25px">GUIDES</div>
-
-    <a class="side-link" href="#progression">
-        <span class="side-number">→</span> Main Progression
-    </a>
-
-    <a class="side-link" href="#checklist">
-        <span class="side-number">✓</span> Completion Checklist
-    </a>
-
-    <a class="side-link" href="#quick">
-        <span class="side-number">?</span> Quick Reference
-    </a>
-
+    <div class="nav-group">
+        <div class="nav-group-title">Guides</div>
+        <a href="#progression" class="nav-link"><span class="rune">→</span> Main Progression</a>
+        <a href="#checklist" class="nav-link"><span class="rune">✓</span> Completion Checklist</a>
+        <a href="#quick" class="nav-link"><span class="rune">?</span> Quick Reference</a>
+    </div>
 </aside>
 
-
-<main class="main" id="top">
-
-<div class="content">
+<!-- MAIN CONTENT -->
+<main class="main-content">
 
     <!-- HERO -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <div class="eyebrow">Unofficial Game Encyclopedia</div>
-
-            <h1>The Legend of the <span>Shattered Realm</span></h1>
-
-            <p>
-                A complete reference to TLTSR — its world, biomes,
-                items, systems, progression, secrets, and the journey
-                into the Shattered Blue Realm.
-            </p>
-
-            <div class="hero-meta">
-                <span class="badge">Sandbox Adventure</span>
-                <span class="badge">Procedural Worlds</span>
-                <span class="badge">Multiplayer</span>
-                <span class="badge">Exploration</span>
-            </div>
-
+    <header class="hero" id="game">
+        <div class="hero-tag">Unofficial Game Encyclopedia</div>
+        <h2>The Legend of the Shattered Realm</h2>
+        <p class="hero-desc">
+            A complete reference to TLTSR — its world, biomes, items, systems, progression, secrets, and the journey into the Shattered Blue Realm.
+        </p>
+        <div class="hero-tags">
+            <span class="tag-pill">Sandbox Adventure</span>
+            <span class="tag-pill">Procedural Worlds</span>
+            <span class="tag-pill">Multiplayer</span>
+            <span class="tag-pill">Exploration</span>
         </div>
+        <div class="hero-actions">
+            <a href="#progression" class="btn">⚔ Main Progression</a>
+            <a href="#blue-realm" class="btn realm">◈ The Blue Realm</a>
+            <a href="#quick" class="btn ref">⌕ Quick Reference</a>
+        </div>
+    </header>
 
-    </section>
-
-
-    <!-- OVERVIEW CARDS -->
-
-    <div class="grid">
-
-        <a class="card" href="#progression">
-            <div class="card-icon">⚔</div>
-            <h3>Main Progression</h3>
-            <p>Follow the journey from the starting world to the Azure Warden.</p>
-        </a>
-
-        <a class="card" href="#blue-realm">
-            <div class="card-icon">◈</div>
-            <h3>The Blue Realm</h3>
-            <p>Discover the strange world beyond the Sky Island portal.</p>
-        </a>
-
-        <a class="card" href="#quick">
-            <div class="card-icon">⌕</div>
-            <h3>Quick Reference</h3>
-            <p>Find answers to the most common TLTSR questions.</p>
-        </a>
-
-    </div>
-
-
-    <!-- GAME -->
-
-    <section class="section" id="game">
-
-        <div class="section-head">
+    <!-- 01 THE GAME -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">01</span>
-            <div>
-                <h2>The Game</h2>
-                <div class="section-desc">What is TLTSR?</div>
-            </div>
+            <h2 class="section-title">The Game</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                <strong>The Legend of the Shattered Realm</strong>, commonly
-                called <strong>TLTSR</strong>, is a sandbox adventure game
-                built around exploration, survival, crafting, combat,
-                procedural world generation, and progression.
-            </p>
-
-            <p>
-                The player begins in a generated world and gradually becomes
-                stronger by gathering resources, crafting equipment, exploring
-                biomes, discovering structures, and finding special progression
-                items.
-            </p>
-
-            <p>
-                TLTSR is not designed around staying in one location.
-                Exploration is one of the game's central mechanics.
-            </p>
+        <h3>What is TLTSR?</h3>
+        <p>The Legend of the Shattered Realm, commonly called TLTSR, is a sandbox adventure game built around exploration, survival, crafting, combat, procedural world generation, and progression.</p>
+        <p>The player begins in a generated world and gradually becomes stronger by gathering resources, crafting equipment, exploring biomes, discovering structures, and finding special progression items.</p>
+        <p>TLTSR is not designed around staying in one location. Exploration is one of the game's central mechanics.</p>
+        <div class="codex-note">
+            <span class="label">Core Philosophy</span>
+            Explore first. Discover what the world contains. Progression is built around connecting discoveries together.
         </div>
-
-        <div class="info">
-            <div class="info-title">Core philosophy</div>
-            <p>
-                Explore first. Discover what the world contains.
-                Progression is built around connecting discoveries together.
-            </p>
-        </div>
-
     </section>
 
-
-    <!-- WORLD -->
-
+    <!-- 02 THE WORLD -->
     <section class="section" id="world">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">02</span>
-            <div>
-                <h2>The World</h2>
-                <div class="section-desc">A world created from a seed.</div>
-            </div>
+            <h2 class="section-title">The World</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                TLTSR worlds are procedurally generated. The layout of a world
-                is created from a seed rather than being exactly the same every
-                time.
-            </p>
-        </div>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="card-icon">▦</div>
-                <h3>Terrain</h3>
+        <p>A world created from a seed. TLTSR worlds are procedurally generated. The layout of a world is created from a seed rather than being exactly the same every time.</p>
+        <div class="grid-3">
+            <div class="data-card">
+                <span class="icon">▦</span>
+                <h4>Terrain</h4>
                 <p>Generated landscapes create different terrain across each world.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">◇</div>
-                <h3>Biomes</h3>
+            <div class="data-card">
+                <span class="icon">◇</span>
+                <h4>Biomes</h4>
                 <p>Different environmental regions provide variety during exploration.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">⌂</div>
-                <h3>Structures</h3>
+            <div class="data-card">
+                <span class="icon">⌂</span>
+                <h4>Structures</h4>
                 <p>Special locations can contain loot, resources, and progression.</p>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- BIOMES -->
-
+    <!-- 03 BIOMES -->
     <section class="section" id="biomes">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">03</span>
-            <div>
-                <h2>Biomes</h2>
-                <div class="section-desc">The environments of TLTSR.</div>
+            <h2 class="section-title">Biomes</h2>
+        </div>
+        <p>The environments of TLTSR.</p>
+        <div class="grid-3">
+            <div class="data-card">
+                <span class="icon">🌲</span>
+                <h4>Forest / Surface</h4>
+                <p>Ordinary surface regions where the player's journey begins.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">◇</span>
+                <h4>Plains</h4>
+                <p>Open terrain useful for travel and exploration.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">☀</span>
+                <h4>Desert</h4>
+                <p>A dry biome with its own terrain and environmental characteristics.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">≈</span>
+                <h4>Ocean</h4>
+                <p>Large water regions that create new exploration challenges.</p>
+            </div>
+            <div class="data-card" style="border-color: var(--border-glow);">
+                <span class="icon" style="color: var(--accent-teal);">◆</span>
+                <h4>Blue Plains</h4>
+                <p>A relatively flat region of the Shattered Blue Realm.</p>
+            </div>
+            <div class="data-card" style="border-color: var(--border-glow);">
+                <span class="icon" style="color: var(--accent-teal);">▲</span>
+                <h4>Blue Hills</h4>
+                <p>A mountainous region deep within the Blue Realm.</p>
             </div>
         </div>
-
-        <div class="entity-grid">
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">🌲</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Forest / Surface</h3>
-                    <p>Ordinary surface regions where the player's journey begins.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">◇</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Plains</h3>
-                    <p>Open terrain useful for travel and exploration.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">☀</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Desert</h3>
-                    <p>A dry biome with its own terrain and environmental characteristics.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">≈</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Ocean</h3>
-                    <p>Large water regions that create new exploration challenges.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top purple">
-                    <div class="entity-symbol">◆</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Blue Plains</h3>
-                    <p>A relatively flat region of the Shattered Blue Realm.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top purple">
-                    <div class="entity-symbol">▲</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Blue Hills</h3>
-                    <p>A mountainous region deep within the Blue Realm.</p>
-                </div>
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- OCEANS -->
-
-    <section class="section" id="oceans">
-
-        <div class="section-head">
+    <!-- 04 OCEANS -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">04</span>
-            <div>
-                <h2>Oceans</h2>
-                <div class="section-desc">Large water regions.</div>
-            </div>
+            <h2 class="section-title">Oceans</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Oceans are large water regions generated throughout the world.
-                Ocean exploration provides access to areas that cannot be
-                reached simply by traveling across ordinary land.
-            </p>
+        <p>Large water regions. Oceans are large water regions generated throughout the world. Ocean exploration provides access to areas that cannot be reached simply by traveling across ordinary land.</p>
+        <div class="codex-note">
+            <span class="label">Exploration Tip</span>
+            Water can restrict movement, so preparation and mobility become increasingly useful when crossing large ocean regions.
         </div>
-
-        <div class="info blue">
-            <div class="info-title">Exploration tip</div>
-            <p>
-                Water can restrict movement, so preparation and mobility
-                become increasingly useful when crossing large ocean regions.
-            </p>
-        </div>
-
     </section>
 
-
-    <!-- DESERT -->
-
-    <section class="section" id="desert">
-
-        <div class="section-head">
+    <!-- 05 DESERTS -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">05</span>
-            <div>
-                <h2>Deserts</h2>
-                <div class="section-desc">A major surface biome.</div>
-            </div>
+            <h2 class="section-title">Deserts</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                The Desert is a dry biome with its own terrain and environmental
-                characteristics. Exploring it can reveal resources and areas
-                that may not appear elsewhere.
-            </p>
-        </div>
-
+        <p>A major surface biome. The Desert is a dry biome with its own terrain and environmental characteristics. Exploring it can reveal resources and areas that may not appear elsewhere.</p>
     </section>
 
-
-    <!-- STRUCTURES -->
-
+    <!-- 06 STRUCTURES -->
     <section class="section" id="structures">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">06</span>
-            <div>
-                <h2>Structures</h2>
-                <div class="section-desc">Places worth investigating.</div>
+            <h2 class="section-title">Structures</h2>
+        </div>
+        <p>Places worth investigating.</p>
+        <div class="grid-2">
+            <div class="data-card">
+                <span class="icon">🏰</span>
+                <h4>Castles</h4>
+                <p>Important structures that can contain valuable loot and Enchanting Books.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">☼</span>
+                <h4>Shrines</h4>
+                <p>Special locations connected to the realm's deeper progression.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">☁</span>
+                <h4>Sky Islands</h4>
+                <p>Elevated locations far above the normal terrain.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">◉</span>
+                <h4>Portal Structures</h4>
+                <p>Special structures that can provide access to advanced areas.</p>
             </div>
         </div>
-
-        <div class="entity-grid">
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">🏰</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Castles</h3>
-                    <p>Important structures that can contain valuable loot and Enchanting Books.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top purple">
-                    <div class="entity-symbol">☼</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Shrines</h3>
-                    <p>Special locations connected to the realm's deeper progression.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">☁</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Sky Islands</h3>
-                    <p>Elevated locations far above the normal terrain.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top purple">
-                    <div class="entity-symbol">◉</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Portal Structures</h3>
-                    <p>Special structures that can provide access to advanced areas.</p>
-                </div>
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- SKY ISLAND -->
-
-    <section class="section" id="sky-island">
-
-        <div class="section-head">
+    <!-- 07 SKY ISLANDS -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">07</span>
-            <div>
-                <h2>Sky Islands</h2>
-                <div class="section-desc">A gateway above the ordinary world.</div>
-            </div>
+            <h2 class="section-title">Sky Islands</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                The Sky Island is one of the most important locations in
-                TLTSR's main progression. It is located high above the normal
-                terrain and contains a special shrine and portal.
-            </p>
-
-            <p>
-                Reaching the island becomes significantly easier once the
-                player has access to <strong>Wings</strong>.
-            </p>
+        <p>A gateway above the ordinary world. The Sky Island is one of the most important locations in TLTSR's main progression. It is located high above the normal terrain and contains a special shrine and portal.</p>
+        <p>Reaching the island becomes significantly easier once the player has access to Wings.</p>
+        <div class="codex-warning">
+            <span class="label">Important Location</span>
+            Find the shrine on the Sky Island. The portal there is the gateway to the Shattered Blue Realm.
         </div>
-
-        <div class="info purple">
-            <div class="info-title">Important location</div>
-            <p>
-                Find the shrine on the Sky Island. The portal there is the
-                gateway to the Shattered Blue Realm.
-            </p>
-        </div>
-
     </section>
 
-
-    <!-- ITEMS -->
-
+    <!-- 08 ITEMS -->
     <section class="section" id="items">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">08</span>
-            <div>
-                <h2>Items</h2>
-                <div class="section-desc">Resources, equipment, and progression objects.</div>
-            </div>
+            <h2 class="section-title">Items</h2>
         </div>
-
-        <div class="table-wrap">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Category</th>
-                        <th>Known purpose</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Emerald</td>
-                        <td>Material</td>
-                        <td>Used in advanced crafting.</td>
-                    </tr>
-
-                    <tr>
-                        <td>Enchanting Book</td>
-                        <td>Advanced</td>
-                        <td>Connected to the enchanting system.</td>
-                    </tr>
-
-                    <tr>
-                        <td>Enchanting Crystal</td>
-                        <td>Progression</td>
-                        <td>Used to activate the Blue Realm portal.</td>
-                    </tr>
-
-                    <tr>
-                        <td>Wings</td>
-                        <td>Mobility</td>
-                        <td>Allows the player to fly.</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
+        <p>Resources, equipment, and progression objects.</p>
+        <table class="codex-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Known Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Emerald</td>
+                    <td><span class="tag">Material</span></td>
+                    <td>Used in advanced crafting.</td>
+                </tr>
+                <tr>
+                    <td>Enchanting Book</td>
+                    <td><span class="tag gold">Advanced</span></td>
+                    <td>Connected to the enchanting system.</td>
+                </tr>
+                <tr>
+                    <td>Enchanting Crystal</td>
+                    <td><span class="tag blue">Progression</span></td>
+                    <td>Used to activate the Blue Realm portal.</td>
+                </tr>
+                <tr>
+                    <td>Wings</td>
+                    <td><span class="tag">Mobility</span></td>
+                    <td>Allows the player to fly.</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
-
-    <!-- WEAPONS -->
-
+    <!-- 09 WEAPONS -->
     <section class="section" id="weapons">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">09</span>
-            <div>
-                <h2>Weapons</h2>
-                <div class="section-desc">Tools for surviving combat.</div>
+            <h2 class="section-title">Weapons</h2>
+        </div>
+        <p>Tools for surviving combat.</p>
+        <div class="grid-2">
+            <div class="data-card">
+                <span class="icon">⚔</span>
+                <h4>Weapons</h4>
+                <p>Used to fight hostile creatures and bosses throughout the world.</p>
+            </div>
+            <div class="data-card">
+                <span class="icon">🔨</span>
+                <h4>Mace</h4>
+                <p>A known weapon added during TLTSR development.</p>
             </div>
         </div>
-
-        <div class="entity-grid">
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">⚔</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Weapons</h3>
-                    <p>Used to fight hostile creatures and bosses throughout the world.</p>
-                </div>
-            </div>
-
-            <div class="entity">
-                <div class="entity-top">
-                    <div class="entity-symbol">🔨</div>
-                </div>
-                <div class="entity-body">
-                    <h3>Mace</h3>
-                    <p>A known weapon added during TLTSR development.</p>
-                </div>
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- TOOLS -->
-
-    <section class="section" id="tools">
-
-        <div class="section-head">
+    <!-- 10 TOOLS -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">10</span>
-            <div>
-                <h2>Tools</h2>
-                <div class="section-desc">Gather. Build. Progress.</div>
-            </div>
+            <h2 class="section-title">Tools</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Tools allow players to gather resources and interact with the
-                world. They are especially important during the early and
-                middle stages of progression.
-            </p>
-        </div>
-
+        <p>Gather. Build. Progress. Tools allow players to gather resources and interact with the world. They are especially important during the early and middle stages of progression.</p>
     </section>
 
-
-    <!-- CRAFTING -->
-
+    <!-- 11 CRAFTING -->
     <section class="section" id="crafting">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">11</span>
-            <div>
-                <h2>Crafting</h2>
-                <div class="section-desc">The foundation of equipment progression.</div>
+            <h2 class="section-title">Crafting</h2>
+        </div>
+        <p>The foundation of equipment progression. Crafting is one of TLTSR's primary progression systems. Players collect resources from the world and use them to create equipment and useful objects.</p>
+        <div class="timeline">
+            <div class="timeline-step">
+                <h4>01 Basic Resources</h4>
+                <p>Gather materials from the world.</p>
+            </div>
+            <div class="timeline-step">
+                <h4>02 Basic Tools & Equipment</h4>
+                <p>Turn gathered materials into useful gear.</p>
+            </div>
+            <div class="timeline-step">
+                <h4>03 Stronger Equipment</h4>
+                <p>Improve your ability to survive and explore.</p>
+            </div>
+            <div class="timeline-step">
+                <h4>04 Advanced Materials</h4>
+                <p>Reach the resources needed for later progression.</p>
             </div>
         </div>
-
-        <div class="prose">
-            <p>
-                Crafting is one of TLTSR's primary progression systems.
-                Players collect resources from the world and use them to
-                create equipment and useful objects.
-            </p>
-        </div>
-
-        <div class="progression">
-
-            <div class="step">
-                <div class="step-num">01</div>
-                <div class="step-content">
-                    <strong>Basic resources</strong>
-                    <p>Gather materials from the world.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">02</div>
-                <div class="step-content">
-                    <strong>Basic tools & equipment</strong>
-                    <p>Turn gathered materials into useful gear.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">03</div>
-                <div class="step-content">
-                    <strong>Stronger equipment</strong>
-                    <p>Improve your ability to survive and explore.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">04</div>
-                <div class="step-content">
-                    <strong>Advanced materials</strong>
-                    <p>Reach the resources needed for later progression.</p>
-                </div>
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- RARITY -->
-
-    <section class="section" id="rarity">
-
-        <div class="section-head">
+    <!-- 12 RARITY -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">12</span>
-            <div>
-                <h2>Rarity</h2>
-                <div class="section-desc">Not every item is created equal.</div>
-            </div>
+            <h2 class="section-title">Rarity</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                TLTSR uses rarity as part of its equipment and item progression.
-                Rarity helps distinguish ordinary equipment from more valuable
-                or specialized equipment.
-            </p>
-        </div>
-
+        <p>Not every item is created equal. TLTSR uses rarity as part of its equipment and item progression. Rarity helps distinguish ordinary equipment from more valuable or specialized equipment.</p>
     </section>
 
-
-    <!-- ENCHANTING -->
-
+    <!-- 13 ENCHANTING -->
     <section class="section" id="enchanting">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">13</span>
-            <div>
-                <h2>Enchanting</h2>
-                <div class="section-desc">Advanced equipment progression.</div>
-            </div>
+            <h2 class="section-title">Enchanting</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Enchanting introduces progression beyond ordinary equipment.
-                It is closely connected to <strong>Enchanting Books</strong>
-                and <strong>Enchanting Crystals</strong>.
-            </p>
-        </div>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="card-icon">📖</div>
-                <h3>Enchanting Books</h3>
+        <p>Advanced equipment progression. Enchanting introduces progression beyond ordinary equipment. It is closely connected to Enchanting Books and Enchanting Crystals.</p>
+        <div class="grid-3">
+            <div class="data-card">
+                <span class="icon">📖</span>
+                <h4>Enchanting Books</h4>
                 <p>Special items associated with the enchanting system.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">◆</div>
-                <h3>Enchanting Crystals</h3>
+            <div class="data-card">
+                <span class="icon">◆</span>
+                <h4>Enchanting Crystals</h4>
                 <p>A critical progression material for the Blue Realm.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">✦</div>
-                <h3>Advanced Gear</h3>
+            <div class="data-card">
+                <span class="icon">✦</span>
+                <h4>Advanced Gear</h4>
                 <p>Enchanting helps push equipment beyond ordinary progression.</p>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- BOOKS -->
-
-    <section class="section" id="books">
-
-        <div class="section-head">
+    <!-- 14 ENCHANTING BOOKS -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">14</span>
-            <div>
-                <h2>Enchanting Books</h2>
-                <div class="section-desc">Rare books tied to advanced progression.</div>
-            </div>
+            <h2 class="section-title">Enchanting Books</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Enchanting Books are special items connected to the enchanting
-                system. An established source is the chests found in the castle
-                in the warped kingdom area.
-            </p>
+        <p>Rare books tied to advanced progression. Enchanting Books are special items connected to the enchanting system. An established source is the chests found in the castle in the warped kingdom area.</p>
+        <div class="codex-note">
+            <span class="label">Where to Look</span>
+            Search castle chests carefully when exploring the warped kingdom area.
         </div>
-
-        <div class="info yellow">
-            <div class="info-title">Where to look</div>
-            <p>
-                Search castle chests carefully when exploring the warped
-                kingdom area.
-            </p>
-        </div>
-
     </section>
 
-
-    <!-- CRYSTAL -->
-
-    <section class="section" id="crystal">
-
-        <div class="section-head">
+    <!-- 15 ENCHANTING CRYSTALS -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">15</span>
-            <div>
-                <h2>Enchanting Crystals</h2>
-                <div class="section-desc">A key progression gate.</div>
-            </div>
+            <h2 class="section-title">Enchanting Crystals</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                The Enchanting Crystal is one of the most important known
-                progression materials in TLTSR.
-            </p>
-
-            <p>
-                Its major known use is activating the special portal found
-                at the Sky Island shrine.
-            </p>
+        <p>A key progression gate. The Enchanting Crystal is one of the most important known progression materials in TLTSR.</p>
+        <p>Its major known use is activating the special portal found at the Sky Island shrine.</p>
+        <div class="codex-warning">
+            <span class="label">Progression Requirement</span>
+            Obtain an Enchanting Crystal before attempting to activate the Blue Realm portal.
         </div>
-
-        <div class="info purple">
-            <div class="info-title">Progression requirement</div>
-            <p>
-                Obtain an Enchanting Crystal before attempting to activate
-                the Blue Realm portal.
-            </p>
-        </div>
-
     </section>
 
-
-    <!-- WINGS -->
-
+    <!-- 16 WINGS -->
     <section class="section" id="wings">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">16</span>
-            <div>
-                <h2>Wings</h2>
-                <div class="section-desc">The ultimate vertical mobility tool.</div>
-            </div>
+            <h2 class="section-title">Wings</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Wings are a mobility mechanic that allows the player to fly.
-                Holding the jump input allows the player to rise through the air.
-            </p>
-        </div>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="card-icon">☁</div>
-                <h3>Sky Islands</h3>
+        <p>The ultimate vertical mobility tool. Wings are a mobility mechanic that allows the player to fly. Holding the jump input allows the player to rise through the air.</p>
+        <div class="grid-3">
+            <div class="data-card">
+                <span class="icon">☁</span>
+                <h4>Sky Islands</h4>
                 <p>Reach elevated islands far above the normal world.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">▲</div>
-                <h3>Mountains</h3>
+            <div class="data-card">
+                <span class="icon">▲</span>
+                <h4>Mountains</h4>
                 <p>Cross difficult vertical terrain without climbing everything.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">↗</div>
-                <h3>Exploration</h3>
+            <div class="data-card">
+                <span class="icon">↗</span>
+                <h4>Exploration</h4>
                 <p>Travel across gaps and navigate dangerous areas.</p>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- ENEMIES -->
-
-    <section class="section" id="enemies">
-
-        <div class="section-head">
+    <!-- 17 ENEMIES -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">17</span>
-            <div>
-                <h2>Enemies</h2>
-                <div class="section-desc">Hostile creatures of the realm.</div>
-            </div>
+            <h2 class="section-title">Enemies</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Different enemies can appear in different areas of the world.
-                Combat becomes increasingly important as the player enters
-                more dangerous areas.
-            </p>
+        <p>Hostile creatures of the realm. Different enemies can appear in different areas of the world. Combat becomes increasingly important as the player enters more dangerous areas.</p>
+        <div class="codex-note">
+            <span class="label">Combat Principle</span>
+            Identify an enemy, understand its behavior, keep enough distance to react, and attack when an opening appears.
         </div>
-
-        <div class="info">
-            <div class="info-title">Combat principle</div>
-            <p>
-                Identify an enemy, understand its behavior, keep enough
-                distance to react, and attack when an opening appears.
-            </p>
-        </div>
-
     </section>
 
-
-    <!-- BOSSES -->
-
-    <section class="section" id="bosses">
-
-        <div class="section-head">
+    <!-- 18 BOSSES -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">18</span>
-            <div>
-                <h2>Bosses</h2>
-                <div class="section-desc">Major challenges and progression milestones.</div>
-            </div>
+            <h2 class="section-title">Bosses</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                Bosses are significantly stronger encounters that require
-                more preparation than ordinary enemies.
-            </p>
-        </div>
-
-        <ul class="clean-list">
-            <li>Strong and reliable weapon</li>
-            <li>Defensive equipment</li>
-            <li>Healing or survival supplies</li>
-            <li>Mobility equipment</li>
-            <li>Enough space to move</li>
-            <li>An escape route if necessary</li>
+        <p>Major challenges and progression milestones. Bosses are significantly stronger encounters that require more preparation than ordinary enemies.</p>
+        <ul style="list-style: none; padding: 0; margin: 20px 0;">
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--border-dim);">◆ Strong and reliable weapon</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--border-dim);">◆ Defensive equipment</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--border-dim);">◆ Healing or survival supplies</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--border-dim);">◆ Mobility equipment</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--border-dim);">◆ Enough space to move</li>
+            <li style="padding: 8px 0; border-bottom: 1px solid var(--border-dim);">◆ An escape route if necessary</li>
         </ul>
-
     </section>
 
-
-    <!-- WARDEN -->
-
+    <!-- 19 AZURE WARDEN -->
     <section class="section" id="warden">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">19</span>
-            <div>
-                <h2>Azure Warden</h2>
-                <div class="section-desc">Guardian of the Shattered Blue Realm.</div>
-            </div>
+            <h2 class="section-title">Azure Warden</h2>
         </div>
-
-        <div class="entity" style="margin-bottom:22px">
-
-            <div class="entity-top purple" style="height:170px;padding:30px">
-                <div style="font-size:65px">◈</div>
-            </div>
-
-            <div class="entity-body" style="padding:24px">
-                <h3 style="font-size:21px">The Azure Warden</h3>
-                <p style="font-size:13px">
-                    A major boss associated with the Shattered Blue Realm
-                    and one of TLTSR's major progression challenges.
-                </p>
-            </div>
-
+        <p>Guardian of the Shattered Blue Realm.</p>
+        <div class="data-card" style="margin-bottom: 30px; border-color: var(--border-glow);">
+            <span class="icon" style="color: var(--accent-teal);">◈</span>
+            <h4>The Azure Warden</h4>
+            <p>A major boss associated with the Shattered Blue Realm and one of TLTSR's major progression challenges.</p>
         </div>
-
-        <div class="prose">
-            <p>
-                The Azure Warden should not be approached as an ordinary enemy.
-                Preparation matters.
-            </p>
+        <p>The Azure Warden should not be approached as an ordinary enemy. Preparation matters.</p>
+        <div class="codex-note" style="border-left-color: var(--accent-teal); background: linear-gradient(90deg, rgba(45, 212, 191, 0.05) 0%, transparent 100%);">
+            <span class="label" style="color: var(--accent-teal);">Boss Strategy</span>
+            Survive first. Learn the attack pattern. Recognize openings. Strike when it is safe, then return to a safe position.
         </div>
-
-        <div class="info red">
-            <div class="info-title">Boss strategy</div>
-            <p>
-                Survive first. Learn the attack pattern. Recognize openings.
-                Strike when it is safe, then return to a safe position.
-            </p>
-        </div>
-
-        <h3>Recommended preparation</h3>
-
-        <ul class="clean-list">
-            <li>Strong equipment</li>
-            <li>A reliable weapon</li>
-            <li>Adequate survival supplies</li>
-            <li>Good mobility</li>
-            <li>Knowledge of the surrounding terrain</li>
-        </ul>
-
+        <p style="margin-top: 20px;"><strong>Recommended Preparation:</strong> Strong equipment, a reliable weapon, adequate survival supplies, good mobility, and knowledge of the surrounding terrain.</p>
     </section>
 
-
-    <!-- BLUE REALM -->
-
-    <section class="section" id="blue-realm">
-
-        <div class="section-head">
-            <span class="section-number">20</span>
-            <div>
-                <h2>The Shattered Blue Realm</h2>
-                <div class="section-desc">The world beyond the portal.</div>
+    <!-- BLUE REALM ZONE -->
+    <div class="blue-realm-zone" id="blue-realm">
+        <section class="section" style="margin-bottom: 60px;">
+            <div class="section-header">
+                <span class="section-number" style="color: var(--accent-teal);">20</span>
+                <h2 class="section-title" style="color: var(--accent-blue);">The Shattered Blue Realm</h2>
             </div>
-        </div>
-
-        <div class="prose">
-            <p>
-                The Shattered Blue Realm is a major advanced area reached
-                through the special portal located at the Sky Island shrine.
-            </p>
-        </div>
-
-        <div class="progression">
-
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-content">
-                    <strong>Explore the ordinary world</strong>
+            <p style="font-size: 18px; color: #e2e8f0;">The world beyond the portal. The Shattered Blue Realm is a major advanced area reached through the special portal located at the Sky Island shrine.</p>
+            <div class="timeline" style="margin-top: 40px;">
+                <div class="timeline-step blue">
+                    <h4>1. Explore the Ordinary World</h4>
                     <p>Build your equipment and discover progression items.</p>
                 </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-content">
-                    <strong>Obtain an Enchanting Crystal</strong>
+                <div class="timeline-step blue">
+                    <h4>2. Obtain an Enchanting Crystal</h4>
                     <p>The crystal is required to activate the portal.</p>
                 </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-content">
-                    <strong>Find the Sky Island</strong>
+                <div class="timeline-step blue">
+                    <h4>3. Find the Sky Island</h4>
                     <p>Search high above the normal terrain.</p>
                 </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-content">
-                    <strong>Open the portal</strong>
+                <div class="timeline-step blue">
+                    <h4>4. Open the Portal</h4>
                     <p>Use the crystal at the shrine.</p>
                 </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">5</div>
-                <div class="step-content">
-                    <strong>Enter the Blue Realm</strong>
+                <div class="timeline-step blue">
+                    <h4>5. Enter the Blue Realm</h4>
                     <p>The next major stage of the journey begins.</p>
                 </div>
             </div>
+        </section>
 
-        </div>
-
-    </section>
-
-
-    <!-- BLUE PLAINS -->
-
-    <section class="section" id="blue-plains">
-
-        <div class="section-head">
-            <span class="section-number">21</span>
-            <div>
-                <h2>Blue Plains</h2>
-                <div class="section-desc">The open lands of the Blue Realm.</div>
+        <section class="section" id="blue-plains" style="margin-bottom: 60px;">
+            <div class="section-header">
+                <span class="section-number" style="color: var(--accent-teal);">21</span>
+                <h2 class="section-title" style="color: var(--accent-blue);">Blue Plains</h2>
             </div>
-        </div>
+            <p>The open lands of the Blue Realm. Blue Plains are a relatively flat region of the Shattered Blue Realm. The landscape differs visually and geographically from the normal world.</p>
+            <p>The Plains provide an open environment for exploration before the terrain becomes more mountainous.</p>
+        </section>
 
-        <div class="prose">
-            <p>
-                Blue Plains are a relatively flat region of the Shattered Blue
-                Realm. The landscape differs visually and geographically from
-                the normal world.
-            </p>
-
-            <p>
-                The Plains provide an open environment for exploration before
-                the terrain becomes more mountainous.
-            </p>
-        </div>
-
-    </section>
-
-
-    <!-- BLUE HILLS -->
-
-    <section class="section" id="blue-hills">
-
-        <div class="section-head">
-            <span class="section-number">22</span>
-            <div>
-                <h2>Blue Hills</h2>
-                <div class="section-desc">The mountainous region of the Blue Realm.</div>
+        <section class="section" id="blue-hills" style="margin-bottom: 0;">
+            <div class="section-header">
+                <span class="section-number" style="color: var(--accent-teal);">22</span>
+                <h2 class="section-title" style="color: var(--accent-blue);">Blue Hills</h2>
             </div>
-        </div>
+            <p>The mountainous region of the Blue Realm. The Blue Hills are a mountainous region of the Shattered Blue Realm. Their terrain reaches significantly higher elevations than surrounding areas.</p>
+            <div class="codex-note" style="border-left-color: var(--accent-teal); background: linear-gradient(90deg, rgba(45, 212, 191, 0.05) 0%, transparent 100%);">
+                <span class="label" style="color: var(--accent-teal);">Mobility Recommended</span>
+                Wings are especially useful here. Use vertical mobility to cross difficult terrain and reach elevated locations.
+            </div>
+        </section>
+    </div>
 
-        <div class="prose">
-            <p>
-                The Blue Hills are a mountainous region of the Shattered Blue
-                Realm. Their terrain reaches significantly higher elevations
-                than surrounding areas.
-            </p>
-        </div>
-
-        <div class="info purple">
-            <div class="info-title">Mobility recommended</div>
-            <p>
-                Wings are especially useful here. Use vertical mobility to
-                cross difficult terrain and reach elevated locations.
-            </p>
-        </div>
-
-    </section>
-
-
-    <!-- GENERATION -->
-
-    <section class="section" id="generation">
-
-        <div class="section-head">
+    <!-- SYSTEMS -->
+    <section class="section" id="generation" style="margin-top: 120px;">
+        <div class="section-header">
             <span class="section-number">23</span>
-            <div>
-                <h2>World Generation</h2>
-                <div class="section-desc">How TLTSR creates its worlds.</div>
-            </div>
+            <h2 class="section-title">World Generation</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                TLTSR uses procedural generation to dynamically create worlds.
-                This allows terrain and world features to vary between seeds.
-            </p>
-        </div>
-
-        <div class="grid">
-
-            <div class="card">
-                <h3>Terrain</h3>
+        <p>How TLTSR creates its worlds. TLTSR uses procedural generation to dynamically create worlds. This allows terrain and world features to vary between seeds.</p>
+        <div class="grid-3">
+            <div class="data-card">
+                <h4>Terrain</h4>
                 <p>Landscapes can vary between generated worlds.</p>
             </div>
-
-            <div class="card">
-                <h3>Biomes</h3>
+            <div class="data-card">
+                <h4>Biomes</h4>
                 <p>Different environmental regions are generated throughout the world.</p>
             </div>
-
-            <div class="card">
-                <h3>Structures</h3>
+            <div class="data-card">
+                <h4>Structures</h4>
                 <p>Special locations can appear throughout generated worlds.</p>
             </div>
-
         </div>
-
     </section>
-
-
-    <!-- SEEDS -->
 
     <section class="section" id="seeds">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">24</span>
-            <div>
-                <h2>Seeds</h2>
-                <div class="section-desc">The foundation of generated worlds.</div>
-            </div>
+            <h2 class="section-title">Seeds</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                A seed determines the generated world. Seed-based generation
-                makes it possible to share interesting worlds, revisit layouts,
-                compare generation, and test unusual discoveries.
-            </p>
-        </div>
-
+        <p>The foundation of generated worlds. A seed determines the generated world. Seed-based generation makes it possible to share interesting worlds, revisit layouts, compare generation, and test unusual discoveries.</p>
     </section>
-
-
-    <!-- MULTIPLAYER -->
 
     <section class="section" id="multiplayer">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">25</span>
-            <div>
-                <h2>Multiplayer</h2>
-                <div class="section-desc">Explore the realm together.</div>
-            </div>
+            <h2 class="section-title">Multiplayer</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                TLTSR supports multiplayer through <strong>PeerJS</strong>.
-                Players can experience the generated world together,
-                exploring, building, gathering resources, fighting enemies,
-                and progressing as a group.
-            </p>
+        <p>Explore the realm together. TLTSR supports multiplayer through PeerJS. Players can experience the generated world together, exploring, building, gathering resources, fighting enemies, and progressing as a group.</p>
+        <div class="codex-note">
+            <span class="label">Multiplayer Tech</span>
+            TLTSR's multiplayer system uses PeerJS for player connections.
         </div>
-
-        <div class="info green">
-            <div class="info-title">Multiplayer</div>
-            <p>
-                TLTSR's multiplayer system uses PeerJS for player connections.
-            </p>
-        </div>
-
     </section>
-
-
-    <!-- INVENTORY -->
 
     <section class="section" id="inventory">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">26</span>
-            <div>
-                <h2>Inventory</h2>
-                <div class="section-desc">Keep the important stuff.</div>
-            </div>
+            <h2 class="section-title">Inventory</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                The inventory stores resources, equipment, weapons, and other
-                items. Inventory management becomes increasingly important
-                during long exploration trips.
-            </p>
-        </div>
-
+        <p>Keep the important stuff. The inventory stores resources, equipment, weapons, and other items. Inventory management becomes increasingly important during long exploration trips.</p>
     </section>
-
-
-    <!-- MINIMAP -->
 
     <section class="section" id="minimap">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">27</span>
-            <div>
-                <h2>Minimap</h2>
-                <div class="section-desc">Know where you are.</div>
-            </div>
+            <h2 class="section-title">Minimap</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                TLTSR includes a minimap to help players understand their
-                surroundings and navigate the generated world.
-            </p>
-
-            <p>
-                It becomes particularly useful when exploring unfamiliar
-                terrain or traveling long distances.
-            </p>
-        </div>
-
+        <p>Know where you are. TLTSR includes a minimap to help players understand their surroundings and navigate the generated world.</p>
+        <p>It becomes particularly useful when exploring unfamiliar terrain or traveling long distances.</p>
     </section>
 
-
-    <!-- PROGRESSION -->
-
+    <!-- PROGRESSION GUIDE -->
     <section class="section" id="progression">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">GUIDE</span>
-            <div>
-                <h2>Main Progression</h2>
-                <div class="section-desc">From nothing to freeing the Realm.</div>
-            </div>
+            <h2 class="section-title">Main Progression</h2>
+        </div>
+        <p>From nothing to freeing the Realm.</p>
+        <div class="codex-note">
+            <span class="label">The Short Version</span>
+            Explore → Prepare → Find the Map → Follow the trail → Find the Sky Island → Open the portal → Enter the Blue Realm → Find the Azure Warden → Defeat it.
         </div>
 
-        <div class="info">
-            <div class="info-title">The short version</div>
-            <p>
-                Explore → Prepare → Find the Map → Follow the trail →
-                Find the Sky Island → Open the portal → Enter the Blue Realm →
-                Find the Azure Warden → Defeat it.
-            </p>
+        <div class="timeline">
+            <div class="timeline-step"><h4>01 The Beginning</h4><p>Gather resources and learn how the world works.</p></div>
+            <div class="timeline-step"><h4>02 Build Your Foundation</h4><p>Craft tools, weapons, supplies, and useful equipment.</p></div>
+            <div class="timeline-step"><h4>03 Explore the World</h4><p>Visit biomes, structures, underground areas, and unusual locations.</p></div>
+            <div class="timeline-step"><h4>04 Find the Map</h4><p>Search important structures and investigate unusual locations.</p></div>
+            <div class="timeline-step"><h4>05 Follow the Trail</h4><p>Connect discoveries and keep important progression items.</p></div>
+            <div class="timeline-step"><h4>06 Prepare</h4><p>Upgrade equipment and work toward Enchanting Books and a Crystal.</p></div>
+            <div class="timeline-step"><h4>07 Find the Sky Island</h4><p>Use Wings to explore the sky and locate the island.</p></div>
+            <div class="timeline-step"><h4>08 Open the Portal</h4><p>Activate the shrine portal using an Enchanting Crystal.</p></div>
+            <div class="timeline-step"><h4>09 Enter the Blue Realm</h4><p>Step through the portal into the Shattered Blue Realm.</p></div>
+            <div class="timeline-step"><h4>10 Explore the Blue Plains</h4><p>Cross the flatter region and continue toward the hills.</p></div>
+            <div class="timeline-step"><h4>11 Cross the Blue Hills</h4><p>Use mobility to navigate the mountainous terrain.</p></div>
+            <div class="timeline-step"><h4>12 Find the Azure Warden</h4><p>Locate the major boss of the Blue Realm.</p></div>
+            <div class="timeline-step"><h4>13 Prepare for the Battle</h4><p>Bring reliable equipment, weapons, supplies, and mobility.</p></div>
+            <div class="timeline-step"><h4>14 Defeat the Azure Warden</h4><p>Survive attacks, recognize openings, and strike carefully.</p></div>
+            <div class="timeline-step blue"><h4>15 Free the Realm</h4><p>The main journey is complete — but the world remains.</p></div>
         </div>
-
-        <div class="progression">
-
-            <div class="step">
-                <div class="step-num">01</div>
-                <div class="step-content">
-                    <strong>The Beginning</strong>
-                    <p>Gather resources and learn how the world works.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">02</div>
-                <div class="step-content">
-                    <strong>Build Your Foundation</strong>
-                    <p>Craft tools, weapons, supplies, and useful equipment.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">03</div>
-                <div class="step-content">
-                    <strong>Explore the World</strong>
-                    <p>Visit biomes, structures, underground areas, and unusual locations.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">04</div>
-                <div class="step-content">
-                    <strong>Find the Map</strong>
-                    <p>Search important structures and investigate unusual locations.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">05</div>
-                <div class="step-content">
-                    <strong>Follow the Trail</strong>
-                    <p>Connect discoveries and keep important progression items.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">06</div>
-                <div class="step-content">
-                    <strong>Prepare</strong>
-                    <p>Upgrade equipment and work toward Enchanting Books and a Crystal.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">07</div>
-                <div class="step-content">
-                    <strong>Find the Sky Island</strong>
-                    <p>Use Wings to explore the sky and locate the island.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">08</div>
-                <div class="step-content">
-                    <strong>Open the Portal</strong>
-                    <p>Activate the shrine portal using an Enchanting Crystal.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">09</div>
-                <div class="step-content">
-                    <strong>Enter the Blue Realm</strong>
-                    <p>Step through the portal into the Shattered Blue Realm.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">10</div>
-                <div class="step-content">
-                    <strong>Explore the Blue Plains</strong>
-                    <p>Cross the flatter region and continue toward the hills.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">11</div>
-                <div class="step-content">
-                    <strong>Cross the Blue Hills</strong>
-                    <p>Use mobility to navigate the mountainous terrain.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">12</div>
-                <div class="step-content">
-                    <strong>Find the Azure Warden</strong>
-                    <p>Locate the major boss of the Blue Realm.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">13</div>
-                <div class="step-content">
-                    <strong>Prepare for the Battle</strong>
-                    <p>Bring reliable equipment, weapons, supplies, and mobility.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">14</div>
-                <div class="step-content">
-                    <strong>Defeat the Azure Warden</strong>
-                    <p>Survive attacks, recognize openings, and strike carefully.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-num">15</div>
-                <div class="step-content">
-                    <strong>Free the Realm</strong>
-                    <p>The main journey is complete — but the world remains.</p>
-                </div>
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- SECRETS -->
-
-    <section class="section" id="secrets">
-
-        <div class="section-head">
+    <!-- SECRETS & DISCOVERIES -->
+    <section class="section">
+        <div class="section-header">
             <span class="section-number">29</span>
-            <div>
-                <h2>Secrets & Discoveries</h2>
-                <div class="section-desc">The world rewards curiosity.</div>
-            </div>
+            <h2 class="section-title">Secrets & Discoveries</h2>
         </div>
-
-        <div class="prose">
-            <p>
-                TLTSR rewards players who explore instead of following only
-                the obvious path.
-            </p>
-        </div>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="card-icon">?</div>
-                <h3>Unusual Terrain</h3>
+        <p>The world rewards curiosity. TLTSR rewards players who explore instead of following only the obvious path.</p>
+        <div class="grid-3">
+            <div class="data-card">
+                <span class="icon">?</span>
+                <h4>Unusual Terrain</h4>
                 <p>Investigate places that look different from their surroundings.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">🏰</div>
-                <h3>Large Structures</h3>
+            <div class="data-card">
+                <span class="icon">🏰</span>
+                <h4>Large Structures</h4>
                 <p>Search castles and other major generated locations.</p>
             </div>
-
-            <div class="card">
-                <div class="card-icon">☁</div>
-                <h3>Elevated Locations</h3>
+            <div class="data-card">
+                <span class="icon">☁</span>
+                <h4>Elevated Locations</h4>
                 <p>Look above the normal terrain for unusual discoveries.</p>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- CHECKLIST -->
-
+    <!-- COMPLETION CHECKLIST -->
     <section class="section" id="checklist">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">✓</span>
-            <div>
-                <h2>Completion Checklist</h2>
-                <div class="section-desc">Track your journey through TLTSR.</div>
-            </div>
+            <h2 class="section-title">Completion Checklist</h2>
         </div>
-
-        <div class="checklist" id="checklistBox">
-
-            <div class="check"><span class="check-box"></span>Create or enter a world</div>
-            <div class="check"><span class="check-box"></span>Gather basic resources</div>
-            <div class="check"><span class="check-box"></span>Craft basic equipment</div>
-            <div class="check"><span class="check-box"></span>Explore the starting region</div>
-
-            <div class="check"><span class="check-box"></span>Explore multiple biomes</div>
-            <div class="check"><span class="check-box"></span>Discover important structures</div>
-            <div class="check"><span class="check-box"></span>Search the castle</div>
-            <div class="check"><span class="check-box"></span>Find the map</div>
-            <div class="check"><span class="check-box"></span>Follow the map's trail</div>
-
-            <div class="check"><span class="check-box"></span>Improve equipment</div>
-            <div class="check"><span class="check-box"></span>Find an Enchanting Book</div>
-            <div class="check"><span class="check-box"></span>Obtain an Enchanting Crystal</div>
-            <div class="check"><span class="check-box"></span>Obtain Wings</div>
-
-            <div class="check"><span class="check-box"></span>Find the Sky Island</div>
-            <div class="check"><span class="check-box"></span>Reach the island</div>
-            <div class="check"><span class="check-box"></span>Find the shrine</div>
-            <div class="check"><span class="check-box"></span>Find the portal</div>
-            <div class="check"><span class="check-box"></span>Activate the portal</div>
-
-            <div class="check"><span class="check-box"></span>Enter the Shattered Blue Realm</div>
-            <div class="check"><span class="check-box"></span>Explore the Blue Plains</div>
-            <div class="check"><span class="check-box"></span>Explore the Blue Hills</div>
-
-            <div class="check"><span class="check-box"></span>Locate the Azure Warden</div>
-            <div class="check"><span class="check-box"></span>Prepare your equipment</div>
-            <div class="check"><span class="check-box"></span>Begin the encounter</div>
-            <div class="check"><span class="check-box"></span>Learn the attack pattern</div>
-            <div class="check"><span class="check-box"></span>Survive the attacks</div>
-            <div class="check"><span class="check-box"></span>Defeat the Azure Warden</div>
-            <div class="check"><span class="check-box"></span>Collect the rewards</div>
-
-            <div class="check"><span class="check-box"></span>Free the Realm</div>
-            <div class="check"><span class="check-box"></span>Continue exploring for 100% completion</div>
-
-        </div>
-
+        <p>Track your journey through TLTSR.</p>
+        <ul class="checklist">
+            <li>Create or enter a world</li>
+            <li>Gather basic resources</li>
+            <li>Craft basic equipment</li>
+            <li>Explore the starting region</li>
+            <li>Explore multiple biomes</li>
+            <li>Discover important structures</li>
+            <li>Search the castle</li>
+            <li>Find the map</li>
+            <li>Follow the map's trail</li>
+            <li>Improve equipment</li>
+            <li>Find an Enchanting Book</li>
+            <li>Obtain an Enchanting Crystal</li>
+            <li>Obtain Wings</li>
+            <li>Find the Sky Island</li>
+            <li>Reach the island</li>
+            <li>Find the shrine</li>
+            <li>Find the portal</li>
+            <li>Activate the portal</li>
+            <li>Enter the Shattered Blue Realm</li>
+            <li>Explore the Blue Plains</li>
+            <li>Explore the Blue Hills</li>
+            <li>Locate the Azure Warden</li>
+            <li>Prepare your equipment</li>
+            <li>Begin the encounter</li>
+            <li>Learn the attack pattern</li>
+            <li>Survive the attacks</li>
+            <li>Defeat the Azure Warden</li>
+            <li>Collect the rewards</li>
+            <li>Free the Realm</li>
+            <li>Continue exploring for 100% completion</li>
+        </ul>
     </section>
-
 
     <!-- QUICK REFERENCE -->
-
     <section class="section" id="quick">
-
-        <div class="section-head">
+        <div class="section-header">
             <span class="section-number">30</span>
-            <div>
-                <h2>Quick Reference</h2>
-                <div class="section-desc">Fast answers.</div>
-            </div>
+            <h2 class="section-title">Quick Reference</h2>
         </div>
-
-        <div class="faq">
-
-            <details>
-                <summary>What does TLTSR stand for?</summary>
-                <p>The Legend of the Shattered Realm.</p>
-            </details>
-
-            <details>
-                <summary>Is the world procedurally generated?</summary>
-                <p>Yes. TLTSR uses procedural generation to create its worlds.</p>
-            </details>
-
-            <details>
-                <summary>Does TLTSR use seeds?</summary>
-                <p>Yes. Seeds determine generated worlds and can be shared between players.</p>
-            </details>
-
-            <details>
-                <summary>Does TLTSR have multiplayer?</summary>
-                <p>Yes. Multiplayer uses PeerJS for player connections.</p>
-            </details>
-
-            <details>
-                <summary>What are Wings?</summary>
-                <p>Wings are a mobility mechanic that allows the player to fly.</p>
-            </details>
-
-            <details>
-                <summary>Where are Enchanting Books found?</summary>
-                <p>They are known to appear in castle chests in the warped kingdom area.</p>
-            </details>
-
-            <details>
-                <summary>What does an Enchanting Crystal do?</summary>
-                <p>One major use is opening the portal to the Shattered Blue Realm.</p>
-            </details>
-
-            <details>
-                <summary>Where is the Blue Realm accessed?</summary>
-                <p>Through a portal located at a Sky Island shrine.</p>
-            </details>
-
-            <details>
-                <summary>What are the Blue Plains?</summary>
-                <p>A relatively flat region of the Shattered Blue Realm.</p>
-            </details>
-
-            <details>
-                <summary>What are the Blue Hills?</summary>
-                <p>A mountainous region of the Shattered Blue Realm.</p>
-            </details>
-
-            <details>
-                <summary>Who is the Azure Warden?</summary>
-                <p>A major boss associated with the Shattered Blue Realm.</p>
-            </details>
-
-        </div>
-
+        <p>Fast answers.</p>
+        
+        <div class="faq-item"><div class="faq-q">What does TLTSR stand for?</div><div class="faq-a">The Legend of the Shattered Realm.</div></div>
+        <div class="faq-item"><div class="faq-q">Is the world procedurally generated?</div><div class="faq-a">Yes. TLTSR uses procedural generation to create its worlds.</div></div>
+        <div class="faq-item"><div class="faq-q">Does TLTSR use seeds?</div><div class="faq-a">Yes. Seeds determine generated worlds and can be shared between players.</div></div>
+        <div class="faq-item"><div class="faq-q">Does TLTSR have multiplayer?</div><div class="faq-a">Yes. Multiplayer uses PeerJS for player connections.</div></div>
+        <div class="faq-item"><div class="faq-q">What are Wings?</div><div class="faq-a">Wings are a mobility mechanic that allows the player to fly.</div></div>
+        <div class="faq-item"><div class="faq-q">Where are Enchanting Books found?</div><div class="faq-a">They are known to appear in castle chests in the warped kingdom area.</div></div>
+        <div class="faq-item"><div class="faq-q">What does an Enchanting Crystal do?</div><div class="faq-a">One major use is opening the portal to the Shattered Blue Realm.</div></div>
+        <div class="faq-item"><div class="faq-q">Where is the Blue Realm accessed?</div><div class="faq-a">Through a portal located at a Sky Island shrine.</div></div>
+        <div class="faq-item"><div class="faq-q">What are the Blue Plains?</div><div class="faq-a">A relatively flat region of the Shattered Blue Realm.</div></div>
+        <div class="faq-item"><div class="faq-q">What are the Blue Hills?</div><div class="faq-a">A mountainous region of the Shattered Blue Realm.</div></div>
+        <div class="faq-item"><div class="faq-q">Who is the Azure Warden?</div><div class="faq-a">A major boss associated with the Shattered Blue Realm.</div></div>
     </section>
 
-
-    <footer>
-        <div>
-            <strong>TLTSR Encyclopedia</strong><br>
-            The Legend of the Shattered Realm
-        </div>
-
-        <div>
-            Unofficial reference • Built for explorers of the Realm
-        </div>
+    <footer class="footer">
+        TLTSR ENCYCLOPEDIA<br>
+        The Legend of the Shattered Realm<br><br>
+        Unofficial reference • Built for explorers of the Realm
     </footer>
 
-</div>
 </main>
-
-
-<script>
-/* MOBILE SIDEBAR */
-
-function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("open");
-}
-
-
-/* CHECKLIST */
-
-document.querySelectorAll(".check").forEach((item,index)=>{
-
-    const saved = localStorage.getItem("tltsr-check-"+index);
-
-    if(saved === "1"){
-        item.classList.add("done");
-    }
-
-    item.addEventListener("click",()=>{
-
-        item.classList.toggle("done");
-
-        localStorage.setItem(
-            "tltsr-check-"+index,
-            item.classList.contains("done") ? "1" : "0"
-        );
-
-    });
-
-});
-
-
-/* SEARCH */
-
-const searchInput = document.getElementById("searchInput");
-const searchResults = document.getElementById("searchResults");
-
-const pages = [
-
-    ["The Game","#game","What is The Legend of the Shattered Realm?"],
-    ["The World","#world","Procedural worlds and exploration."],
-    ["Biomes","#biomes","Forests, plains, deserts, oceans, Blue Plains and Blue Hills."],
-    ["Oceans","#oceans","Large water regions."],
-    ["Deserts","#desert","The desert biome."],
-    ["Structures","#structures","Castles, shrines, Sky Islands and portals."],
-    ["Sky Islands","#sky-island","High-altitude locations containing the Blue Realm portal."],
-    ["Items","#items","Resources and progression items."],
-    ["Weapons","#weapons","Combat equipment including the Mace."],
-    ["Tools","#tools","Gathering and world interaction."],
-    ["Crafting","#crafting","The crafting progression system."],
-    ["Rarity","#rarity","Item and equipment rarity."],
-    ["Enchanting","#enchanting","Advanced equipment progression."],
-    ["Enchanting Books","#books","Books found in castle chests."],
-    ["Enchanting Crystals","#crystal","Crystal required for the Blue Realm portal."],
-    ["Wings","#wings","Flight and vertical mobility."],
-    ["Enemies","#enemies","Hostile creatures."],
-    ["Bosses","#bosses","Major combat encounters."],
-    ["Azure Warden","#warden","Major boss of the Shattered Blue Realm."],
-    ["Shattered Blue Realm","#blue-realm","Advanced realm beyond the portal."],
-    ["Blue Plains","#blue-plains","Flat region of the Blue Realm."],
-    ["Blue Hills","#blue-hills","Mountainous region of the Blue Realm."],
-    ["World Generation","#generation","Procedural generation."],
-    ["Seeds","#seeds","Seed-based worlds."],
-    ["Multiplayer","#multiplayer","PeerJS multiplayer."],
-    ["Inventory","#inventory","Items and equipment storage."],
-    ["Minimap","#minimap","Navigation system."],
-    ["Main Progression","#progression","Complete route through the game."],
-    ["Secrets & Discoveries","#secrets","Things worth investigating."],
-    ["Completion Checklist","#checklist","Track your progress."],
-    ["Quick Reference","#quick","Frequently asked questions."]
-];
-
-
-searchInput.addEventListener("input",()=>{
-
-    const query = searchInput.value.trim().toLowerCase();
-
-    if(!query){
-        searchResults.style.display="none";
-        return;
-    }
-
-    const matches = pages.filter(page =>
-        page[0].toLowerCase().includes(query) ||
-        page[2].toLowerCase().includes(query)
-    ).slice(0,8);
-
-    if(!matches.length){
-        searchResults.innerHTML = `
-            <div style="padding:18px;color:#697183;font-size:12px">
-                No entries found.
-            </div>
-        `;
-        searchResults.style.display="block";
-        return;
-    }
-
-    searchResults.innerHTML = matches.map(page=>`
-        <a class="result" href="${page[1]}">
-            <div class="result-title">${page[0]}</div>
-            <div class="result-desc">${page[2]}</div>
-        </a>
-    `).join("");
-
-    searchResults.style.display="block";
-
-});
-
-
-document.addEventListener("click",(e)=>{
-
-    if(!e.target.closest(".search")){
-        searchResults.style.display="none";
-    }
-
-});
-
-
-/* "/" FOCUS SEARCH */
-
-document.addEventListener("keydown",(e)=>{
-
-    if(
-        e.key === "/" &&
-        document.activeElement.tagName !== "INPUT" &&
-        document.activeElement.tagName !== "TEXTAREA"
-    ){
-        e.preventDefault();
-        searchInput.focus();
-    }
-
-    if(e.key === "Escape"){
-        searchInput.blur();
-        searchResults.style.display="none";
-    }
-
-});
-
-
-/* ACTIVE SIDEBAR LINK */
-
-const sections = document.querySelectorAll(".section");
-const links = document.querySelectorAll(".side-link");
-
-const observer = new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            links.forEach(link=>link.classList.remove("active"));
-
-            const active = document.querySelector(
-                '.side-link[href="#'+entry.target.id+'"]'
-            );
-
-            if(active){
-                active.classList.add("active");
-            }
-
-        }
-
-    });
-
-},{
-    rootMargin:"-110px 0px -65% 0px"
-});
-
-sections.forEach(section=>observer.observe(section));
-
-
-/* CLOSE MOBILE SIDEBAR AFTER CLICK */
-
-links.forEach(link=>{
-
-    link.addEventListener("click",()=>{
-        document.getElementById("sidebar").classList.remove("open");
-    });
-
-});
-</script>
 
 </body>
 </html>
